@@ -1,13 +1,13 @@
 ---
 title: About
-description: Hugo, the world's fastest framework for building websites
-date: '2019-02-28'
+description: 管理者＆サイトの紹介
+date: '2022-12-13'
 aliases:
   - about-us
   - about-hugo
   - contact
-license: CC BY-NC-ND
-lastmod: '2020-10-09'
+#license: CC BY-NC-ND
+#lastmod: '2020-10-09'
 menu:
     main: 
         weight: -90
@@ -15,20 +15,25 @@ menu:
             icon: user
 ---
 
-Written in Go, Hugo is an open source static site generator available under the [Apache Licence 2.0.](https://github.com/gohugoio/hugo/blob/master/LICENSE) Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.
+### 自己紹介
+2012年4月に大学院を卒業して就職しました。
+大学院は学部は情報系であったものの、研究室は無線の研究室でフーリエ変換とかやってました。
+そこから、シンクタンクのSIerに就職し、ネットワーク設計、セキュリティ運用の業務に従事してきました。
+2023年1月から別の企業で働くことになり、働くまでに時間ができたので、今回自分でブログを作ってみようと思い立ち上げた次第です。
 
-Hugo makes use of a variety of open source projects including:
 
-* https://github.com/yuin/goldmark
-* https://github.com/alecthomas/chroma
-* https://github.com/muesli/smartcrop
-* https://github.com/spf13/cobra
-* https://github.com/spf13/viper
+私のキャリアを伝えると、
+ -  2006年4月： 大学入学
+ -  2008年4月～2012年3月：ベンチャー企業でシステムの運用監視に従事（時給1000円で正社員のようにつかわれる…）
+ -  2012年4月～2015年9月：シンクタンクのSierに『正社員として』就職。証券会社向けネットワーク設計に従事。
+ -  2015年10月～2022年12月：人事異動を経て、セキュリティ運用の実行と運用設計に従事。
+ -  2023年1月：SOCベンダへ転職
 
-Hugo is ideal for blogs, corporate websites, creative portfolios, online magazines, single page applications or even a website with thousands of pages.
+### このサイトの紹介
+このブログでは以下のことをお伝えできればと思っています。
+ -  サイバーセキュリティとはどんなことがひつようなのかを初心者向けに説明する。
+ -  IPAの基本～応用情報処理がある程度わかるレベルの方にサイバーセキュリティの技術的な仕組みがわかるようになる。
+ -  (私のように)暗号化以外セキュリティ用語を知らなかった人に、少しでも理解の手助けにする。
 
-Hugo is for people who want to hand code their own website without worrying about setting up complicated runtimes, dependencies and databases.
-
-Websites built with Hugo are extremelly fast, secure and can be deployed anywhere including, AWS, GitHub Pages, Heroku, Netlify and any other hosting provider.
-
-Learn more and contribute on [GitHub](https://github.com/gohugoio).
+自分でサイトを作成してイマイチなところもあると思いますが、みなさんからいろいろ意見をいただいて意味あるコンテンツを作っていければと思っています。
+よろしくお願いします！

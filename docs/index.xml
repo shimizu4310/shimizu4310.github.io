@@ -7,12 +7,43 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>ja</language>
         <lastBuildDate>Tue, 13 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://shimizu4310.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>自己紹介</title>
+        <title>About</title>
+        <link>https://shimizu4310.github.io/about/</link>
+        <pubDate>Tue, 13 Dec 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://shimizu4310.github.io/about/</guid>
+        <description>&lt;h3 id=&#34;自己紹介&#34;&gt;自己紹介&lt;/h3&gt;
+&lt;p&gt;2012年4月に大学院を卒業して就職しました。
+大学院は学部は情報系であったものの、研究室は無線の研究室でフーリエ変換とかやってました。
+そこから、シンクタンクのSIerに就職し、ネットワーク設計、セキュリティ運用の業務に従事してきました。
+2023年1月から別の企業で働くことになり、働くまでに時間ができたので、今回自分でブログを作ってみようと思い立ち上げた次第です。&lt;/p&gt;
+&lt;p&gt;私のキャリアを伝えると、&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;2006年4月： 大学入学&lt;/li&gt;
+&lt;li&gt;2008年4月～2012年3月：ベンチャー企業でシステムの運用監視に従事（時給1000円で正社員のようにつかわれる…）&lt;/li&gt;
+&lt;li&gt;2012年4月～2015年9月：シンクタンクのSierに『正社員として』就職。証券会社向けネットワーク設計に従事。&lt;/li&gt;
+&lt;li&gt;2015年10月～2022年12月：人事異動を経て、セキュリティ運用の実行と運用設計に従事。&lt;/li&gt;
+&lt;li&gt;2023年1月：SOCベンダへ転職&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;このサイトの紹介&#34;&gt;このサイトの紹介&lt;/h3&gt;
+&lt;p&gt;このブログでは以下のことをお伝えできればと思っています。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;サイバーセキュリティとはどんなことがひつようなのかを初心者向けに説明する。&lt;/li&gt;
+&lt;li&gt;IPAの基本～応用情報処理がある程度わかるレベルの方にサイバーセキュリティの技術的な仕組みがわかるようになる。&lt;/li&gt;
+&lt;li&gt;(私のように)暗号化以外セキュリティ用語を知らなかった人に、少しでも理解の手助けにする。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;自分でサイトを作成してイマイチなところもあると思いますが、みなさんからいろいろ意見をいただいて意味あるコンテンツを作っていければと思っています。
+よろしくお願いします！&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>記事作成中。</title>
         <link>https://shimizu4310.github.io/p/self_introduction/</link>
         <pubDate>Tue, 13 Dec 2022 00:00:00 +0000</pubDate>
         
         <guid>https://shimizu4310.github.io/p/self_introduction/</guid>
-        <description>&lt;h3 id=&#34;自己紹介&#34;&gt;自己紹介&lt;/h3&gt;
+        <description>&lt;p&gt;記事作成中です。今後アップデートしていきます。&lt;/p&gt;
+&lt;h3 id=&#34;自己紹介&#34;&gt;自己紹介&lt;/h3&gt;
 &lt;p&gt;簡単に自分の職歴を紹介したいと思います。&lt;/p&gt;
 &lt;p&gt;2012年4月に大学院を卒業して就職しました。
 大学院は学部は情報系であったものの、研究室は無線の研究室でフーリエ変換とかやってました。
@@ -40,34 +71,6 @@
         
         <guid>https://shimizu4310.github.io/archives/</guid>
         <description></description>
-        </item>
-        <item>
-        <title>About</title>
-        <link>https://shimizu4310.github.io/about/</link>
-        <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
-        
-        <guid>https://shimizu4310.github.io/about/</guid>
-        <description>&lt;p&gt;Written in Go, Hugo is an open source static site generator available under the &lt;a class=&#34;link&#34; href=&#34;https://github.com/gohugoio/hugo/blob/master/LICENSE&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Apache Licence 2.0.&lt;/a&gt; Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.&lt;/p&gt;
-&lt;p&gt;Hugo makes use of a variety of open source projects including:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/yuin/goldmark&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://github.com/yuin/goldmark&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/alecthomas/chroma&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://github.com/alecthomas/chroma&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/muesli/smartcrop&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://github.com/muesli/smartcrop&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/spf13/cobra&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://github.com/spf13/cobra&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/spf13/viper&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;https://github.com/spf13/viper&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Hugo is ideal for blogs, corporate websites, creative portfolios, online magazines, single page applications or even a website with thousands of pages.&lt;/p&gt;
-&lt;p&gt;Hugo is for people who want to hand code their own website without worrying about setting up complicated runtimes, dependencies and databases.&lt;/p&gt;
-&lt;p&gt;Websites built with Hugo are extremelly fast, secure and can be deployed anywhere including, AWS, GitHub Pages, Heroku, Netlify and any other hosting provider.&lt;/p&gt;
-&lt;p&gt;Learn more and contribute on &lt;a class=&#34;link&#34; href=&#34;https://github.com/gohugoio&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-</description>
         </item>
         <item>
         <title>Links</title>

@@ -1,13 +1,15 @@
 ---
-title: 自己紹介
-description: 私の自己紹介です。
+title: 記事作成中。
+description: 
 slug: self_introduction
 date: 2022-12-13
-categories: ["Hugo","Shimizu"]
-tags: ["Hugo", "manato"]
+categories: []
+tags: []
 
 draft: false
 ---
+
+記事作成中です。今後アップデートしていきます。
 
 ### 自己紹介
 簡単に自分の職歴を紹介したいと思います。
