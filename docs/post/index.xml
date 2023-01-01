@@ -279,7 +279,155 @@
 	
 &gt;&lt;/p&gt;
 &lt;h3 id=&#34;設定を変更する&#34;&gt;設定を変更する&lt;/h3&gt;
-&lt;p&gt;作成中。&lt;/p&gt;
+&lt;p&gt;以下のサイトを参考に設定を変更しました。
+&lt;a class=&#34;link&#34; href=&#34;https://miiitomi.github.io/p/hugo/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://miiitomi.github.io/p/hugo/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;なお大きく日本語フォントに関する設定と全般の設定に分かれているため、それぞれまとめます。&lt;/p&gt;
+&lt;h4 id=&#34;日本語フォント設定&#34;&gt;日本語フォント設定&lt;/h4&gt;
+&lt;p&gt;元テーマの設定ファイルの変更が必要になります。以下のパスのファイルを開きます。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;E:\Blog\MySite\themes\hugo-theme-stack\assets\scss\variables.scss
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;以下の中国語フォントの箇所を&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    --zh-font-family: ...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;～～中略～～
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    --base-font-family: &amp;#34;Lato&amp;#34;, var(--sys-font-family), var(--zh-font-family), sans-serif;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;以下に変更して中国語フォントではなく日本語フォントになるように変更します。これで漢字が中国フォントになることを防ぐことができます。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    --ja-font-family: &amp;#34;游ゴシック体&amp;#34;, &amp;#34;Yu Gothic&amp;#34;, YuGothic, &amp;#34;ヒラギノ角ゴ Pro&amp;#34;, &amp;#34;Hiragino Kaku Gothic Pro&amp;#34;, &amp;#34;メイリオ&amp;#34;, &amp;#34;Meiryo&amp;#34;;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;～～中略～～
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    --base-font-family: &amp;#34;Lato&amp;#34;, var(--sys-font-family), var(--ja-font-family), sans-serif;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;全般の設定&#34;&gt;全般の設定&lt;/h4&gt;
+&lt;p&gt;以下のサイトを参考に設定を変更しました。詳細は別途まとめようと思いますが、引っかかる要素はなかったと思います。
+&lt;a class=&#34;link&#34; href=&#34;https://miiitomi.github.io/p/hugo/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://miiitomi.github.io/p/hugo/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;なお、アバターやfaviconなどの画像は以下に格納します。&lt;code&gt;images&lt;/code&gt;のディレクトリが無ければ作成します。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;E:\Blog\MySite\static\images
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;記事の作成&#34;&gt;記事の作成&lt;/h3&gt;
+&lt;p&gt;以下のサイトのやり方を参考に記事を作成します。
+&lt;a class=&#34;link&#34; href=&#34;https://miiitomi.github.io/p/hugo/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://miiitomi.github.io/p/hugo/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;上記記事にある通り、&lt;code&gt;hugo server -D -F&lt;/code&gt;でローカル環境でWEBサービスを立ち上げながら、記事やコンテンツの修正をしていきます。
+ここで公開できるまで内容を作りこんでいきます。&lt;/p&gt;
+&lt;h3 id=&#34;github-pagesの設定&#34;&gt;GitHub Pagesの設定&lt;/h3&gt;
+&lt;p&gt;一通り公開できるまで内容ができたら、GitHub Pagesを利用するレポジトリを作っていきます。
+なおここでは、GitHubのアカウントは既に作ってあるものとします。&lt;/p&gt;
+&lt;p&gt;最初にコンテンツを管理するレポジトリを作成します。
+ここでレポジトリ名ですが、URLに指定したい文字列をレポジトリ名にする必要があります。
+なお、GitHub Pagesが提供するドメインをそのまま利用する場合、以下の命名規則とする必要があります。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;XXXX.github.io
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;例えばドメインをこのサイトのように&lt;code&gt;shimizu4310.github.io&lt;/code&gt;としたい場合、作成するレポジトリは以下のように指定します。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;shimizu4310.github.io
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;レポジトリ名にも&lt;code&gt;.github.io&lt;/code&gt;を入れるようにします。
+PublicかPrivateのどちらでも公開はできるようですが、マークダウンの記述の参考として公開もできるため、私はPublicでレポジトリ設定をしています。&lt;/p&gt;
+&lt;p&gt;レポジトリが作成できたら、ソースを&lt;code&gt;docs&lt;/code&gt;になるように変更します。以下のように、&lt;code&gt;Settings&lt;/code&gt;を選択し、&lt;code&gt;Pages&lt;/code&gt;を選択してブランチをdocsに変更しSaveします。
+&lt;img src=&#34;https://shimizu4310.github.io/images/GitHubPages2.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;レポジトリへpush&#34;&gt;レポジトリへPush&lt;/h3&gt;
+&lt;p&gt;上記まで作成できたらレポジトリへプッシュします。
+プッシュする前に、ローカル環境でツールを使って静的コンテンツを作成します。コマンドプロンプトでドキュメントルートのディレクトリまで移動し、以下のコマンドでビルドすれば大丈夫です。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;E:\Blog\MySite&amp;gt; cd E:\Blog\MySite
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;E:\Blog\MySite&amp;gt; hugo
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;上記を実行し静的ファイルが完成していれば、以下のディレクトリに静的ファイルコンテンツが作成されているはずです。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;E:\Blog\MySite\docs
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;なお余談ですが、上記ファイルをapache等のWebサービスのあるサーバに設置するとそのままコンテンツを表示させることができます。&lt;/p&gt;
+&lt;p&gt;ここまでできたら作成したレポジトリにプッシュします。プッシュするコンテンツは以下のパスすべてでdocsのみではありません。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;E:\Blog\MySite
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;プッシュできたら、GitHub Pagesでコンテンツが表示できるか確認します。
+以下のようにたどるとコンテンツが表示できるか確認ができます。
+&lt;img src=&#34;https://shimizu4310.github.io/images/GitHubPages3.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;
+もしくはドメインを直接指定しても確認ができると思います。&lt;/p&gt;
+&lt;p&gt;うまく表示ができなかったりエラーが出る場合は、なんらかビルドに失敗していると考えられます。
+ローカル環境で&lt;code&gt;hugo server -D -F&lt;/code&gt;でうまく表示ができ、GitHub Pages上で表示できない場合、GitHub Pagesでエラーを起こしている可能性があります。
+&lt;img src=&#34;https://shimizu4310.github.io/images/GitHubPages4.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;
+上記のように、&lt;code&gt;Actions&lt;/code&gt;を見るとステータスがみえるため、deployが成功しているかを確認すると原因究明につなげられると思います。
+（エラーが出ている場合は、エラーで検索すると原因や対応方法がわかるかと思います。）&lt;/p&gt;
+&lt;p&gt;長くなりましたが、私も手探りしながら構築しました。もっと良い方法などありましたらツイッター等でコメントをください！&lt;/p&gt;
 </description>
         </item>
         <item>

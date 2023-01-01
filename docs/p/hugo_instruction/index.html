@@ -353,7 +353,15 @@ Hugoのページからローカル環境にあわせたZIPファイルをダウ�
         <li><a href="#サイトのドキュメントルートを作成">サイトのドキュメントルートを作成</a></li>
         <li><a href="#テーマを選択する">テーマを選択する</a></li>
         <li><a href="#テーマを配置する">テーマを配置する</a></li>
-        <li><a href="#設定を変更する">設定を変更する</a></li>
+        <li><a href="#設定を変更する">設定を変更する</a>
+          <ol>
+            <li><a href="#日本語フォント設定">日本語フォント設定</a></li>
+            <li><a href="#全般の設定">全般の設定</a></li>
+          </ol>
+        </li>
+        <li><a href="#記事の作成">記事の作成</a></li>
+        <li><a href="#github-pagesの設定">GitHub Pagesの設定</a></li>
+        <li><a href="#レポジトリへpush">レポジトリへPush</a></li>
       </ol>
     </li>
   </ol>
@@ -696,7 +704,155 @@ Hugoのページからローカル環境にあわせたZIPファイルをダウ�
 	
 ></p>
 <h3 id="設定を変更する">設定を変更する</h3>
-<p>作成中。</p>
+<p>以下のサイトを参考に設定を変更しました。
+<a class="link" href="https://miiitomi.github.io/p/hugo/"  target="_blank" rel="noopener"
+    >https://miiitomi.github.io/p/hugo/</a></p>
+<p>なお大きく日本語フォントに関する設定と全般の設定に分かれているため、それぞれまとめます。</p>
+<h4 id="日本語フォント設定">日本語フォント設定</h4>
+<p>元テーマの設定ファイルの変更が必要になります。以下のパスのファイルを開きます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">E:\Blog\MySite\themes\hugo-theme-stack\assets\scss\variables.scss
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以下の中国語フォントの箇所を</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    --zh-font-family: ...
+</span></span><span class="line"><span class="cl">～～中略～～
+</span></span><span class="line"><span class="cl">    --base-font-family: &#34;Lato&#34;, var(--sys-font-family), var(--zh-font-family), sans-serif;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以下に変更して中国語フォントではなく日本語フォントになるように変更します。これで漢字が中国フォントになることを防ぐことができます。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    --ja-font-family: &#34;游ゴシック体&#34;, &#34;Yu Gothic&#34;, YuGothic, &#34;ヒラギノ角ゴ Pro&#34;, &#34;Hiragino Kaku Gothic Pro&#34;, &#34;メイリオ&#34;, &#34;Meiryo&#34;;
+</span></span><span class="line"><span class="cl">～～中略～～
+</span></span><span class="line"><span class="cl">    --base-font-family: &#34;Lato&#34;, var(--sys-font-family), var(--ja-font-family), sans-serif;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="全般の設定">全般の設定</h4>
+<p>以下のサイトを参考に設定を変更しました。詳細は別途まとめようと思いますが、引っかかる要素はなかったと思います。
+<a class="link" href="https://miiitomi.github.io/p/hugo/"  target="_blank" rel="noopener"
+    >https://miiitomi.github.io/p/hugo/</a></p>
+<p>なお、アバターやfaviconなどの画像は以下に格納します。<code>images</code>のディレクトリが無ければ作成します。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">E:\Blog\MySite\static\images
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="記事の作成">記事の作成</h3>
+<p>以下のサイトのやり方を参考に記事を作成します。
+<a class="link" href="https://miiitomi.github.io/p/hugo/"  target="_blank" rel="noopener"
+    >https://miiitomi.github.io/p/hugo/</a></p>
+<p>上記記事にある通り、<code>hugo server -D -F</code>でローカル環境でWEBサービスを立ち上げながら、記事やコンテンツの修正をしていきます。
+ここで公開できるまで内容を作りこんでいきます。</p>
+<h3 id="github-pagesの設定">GitHub Pagesの設定</h3>
+<p>一通り公開できるまで内容ができたら、GitHub Pagesを利用するレポジトリを作っていきます。
+なおここでは、GitHubのアカウントは既に作ってあるものとします。</p>
+<p>最初にコンテンツを管理するレポジトリを作成します。
+ここでレポジトリ名ですが、URLに指定したい文字列をレポジトリ名にする必要があります。
+なお、GitHub Pagesが提供するドメインをそのまま利用する場合、以下の命名規則とする必要があります。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">XXXX.github.io
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>例えばドメインをこのサイトのように<code>shimizu4310.github.io</code>としたい場合、作成するレポジトリは以下のように指定します。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">shimizu4310.github.io
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>レポジトリ名にも<code>.github.io</code>を入れるようにします。
+PublicかPrivateのどちらでも公開はできるようですが、マークダウンの記述の参考として公開もできるため、私はPublicでレポジトリ設定をしています。</p>
+<p>レポジトリが作成できたら、ソースを<code>docs</code>になるように変更します。以下のように、<code>Settings</code>を選択し、<code>Pages</code>を選択してブランチをdocsに変更しSaveします。
+<img src="/images/GitHubPages2.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h3 id="レポジトリへpush">レポジトリへPush</h3>
+<p>上記まで作成できたらレポジトリへプッシュします。
+プッシュする前に、ローカル環境でツールを使って静的コンテンツを作成します。コマンドプロンプトでドキュメントルートのディレクトリまで移動し、以下のコマンドでビルドすれば大丈夫です。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">E:\Blog\MySite&gt; cd E:\Blog\MySite
+</span></span><span class="line"><span class="cl">E:\Blog\MySite&gt; hugo
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>上記を実行し静的ファイルが完成していれば、以下のディレクトリに静的ファイルコンテンツが作成されているはずです。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">E:\Blog\MySite\docs
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>なお余談ですが、上記ファイルをapache等のWebサービスのあるサーバに設置するとそのままコンテンツを表示させることができます。</p>
+<p>ここまでできたら作成したレポジトリにプッシュします。プッシュするコンテンツは以下のパスすべてでdocsのみではありません。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">E:\Blog\MySite
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>プッシュできたら、GitHub Pagesでコンテンツが表示できるか確認します。
+以下のようにたどるとコンテンツが表示できるか確認ができます。
+<img src="/images/GitHubPages3.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+>
+もしくはドメインを直接指定しても確認ができると思います。</p>
+<p>うまく表示ができなかったりエラーが出る場合は、なんらかビルドに失敗していると考えられます。
+ローカル環境で<code>hugo server -D -F</code>でうまく表示ができ、GitHub Pages上で表示できない場合、GitHub Pagesでエラーを起こしている可能性があります。
+<img src="/images/GitHubPages4.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+>
+上記のように、<code>Actions</code>を見るとステータスがみえるため、deployが成功しているかを確認すると原因究明につなげられると思います。
+（エラーが出ている場合は、エラーで検索すると原因や対応方法がわかるかと思います。）</p>
+<p>長くなりましたが、私も手探りしながら構築しました。もっと良い方法などありましたらツイッター等でコメントをください！</p>
 
 </section>
 
