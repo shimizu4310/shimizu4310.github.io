@@ -6,31 +6,280 @@
         <description>Recent content in Hugo on Security Blog for IT Engineers</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ja</language>
-        <lastBuildDate>Tue, 13 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://shimizu4310.github.io/categories/hugo/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>自己紹介</title>
-        <link>https://shimizu4310.github.io/p/self_introduction/</link>
-        <pubDate>Tue, 13 Dec 2022 00:00:00 +0000</pubDate>
+        <lastBuildDate>Sat, 31 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://shimizu4310.github.io/categories/hugo/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>静的サイトジェネレータとGitHub Pagesを利用したブログ作成</title>
+        <link>https://shimizu4310.github.io/p/hugo_instruction/</link>
+        <pubDate>Sat, 31 Dec 2022 00:00:00 +0000</pubDate>
         
-        <guid>https://shimizu4310.github.io/p/self_introduction/</guid>
-        <description>&lt;h3 id=&#34;自己紹介&#34;&gt;自己紹介&lt;/h3&gt;
-&lt;p&gt;簡単に自分の職歴を紹介したいと思います。&lt;/p&gt;
-&lt;p&gt;2012年4月に大学院を卒業して就職しました。
-大学院は学部は情報系であったものの、研究室は無線の研究室でフーリエ変換とかやってました。
-そこから、金融系の証券系シンクタンクのSIerに就職しました。そこからネットワーク設計、セキュリティ設計を従事してます。&lt;/p&gt;
-&lt;p&gt;2023年から別の企業で働くことになりました。
-別の企業で働くまでに時間ができたので、今回自分でブログを作ってみようと思い立ち上げた次第です。
-私のキャリアを伝えると、2008年4月～2012年3月：ベンチャー企業でシステムの運用監視、
-2012年4月～2015年9月：日系証券シンクタンクで証券会社向けネットワーク設計、2015年10月～2022年12月セキュリティ設計、2023年1月：SOCベンダへ転職　という経歴です。&lt;/p&gt;
-&lt;p&gt;このブログでは以下のことをお伝えできればと思っています。&lt;/p&gt;
+        <guid>https://shimizu4310.github.io/p/hugo_instruction/</guid>
+        <description>&lt;p&gt;最初の記事投稿でサイバーセキュリティ以外の投稿になりますが、このブログの環境づくりで色々手間取ったため、まとめたいと思います。&lt;/p&gt;
+&lt;h2 id=&#34;概要&#34;&gt;概要&lt;/h2&gt;
+&lt;p&gt;以下のプロダクトとサービスを利用してこのブログを作成しています。それらを選んだ理由とその構築方法（メモ）を以下にまとめます。&lt;/p&gt;
+&lt;blockquote&gt;
 &lt;ul&gt;
-&lt;li&gt;サイバーセキュリティとはどんなことがひつようなのかを初心者向けに説明する。&lt;/li&gt;
-&lt;li&gt;IPAの基本～応用情報処理がある程度わかるレベルの方にサイバーセキュリティの技術的な仕組みがわかるようになる。&lt;/li&gt;
-&lt;li&gt;(私のように)暗号化以外セキュリティ用語を知らなかった人に、少しでも理解の手助けにする。&lt;/li&gt;
+&lt;li&gt;静的サイトジェネレータ：&lt;a class=&#34;link&#34; href=&#34;https://gohugo.io&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo&lt;/a&gt; v0.107.0&lt;/li&gt;
+&lt;li&gt;テーマ：&lt;a class=&#34;link&#34; href=&#34;https://github.com/CaiJimmy/hugo-theme-stack&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo Theme Stack&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Git&lt;/li&gt;
+&lt;li&gt;GitHub Pages&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;自分でサイトを作成してイマイチなところもあると思いますが、みなさんからいろいろ意見をいただいて意味あるコンテンツを作っていければと思っています。
-よろしくお願いします！&lt;/p&gt;
-&lt;h3 id=&#34;このサイトの紹介&#34;&gt;このサイトの紹介&lt;/h3&gt;
-&lt;p&gt;これから書きます。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;他のcmsを利用しない理由&#34;&gt;他のCMSを利用しない理由&lt;/h2&gt;
+&lt;p&gt;以下の理由で私は、『静的サイトジェネレータ』『GitHub Pages』でブログを作成しようと思いました。
+私もググって調べて比較した限りなので、本当はもっと良い方法もあったかもしれません。あくまでご参考までに。&lt;/p&gt;
+&lt;h4 id=&#34;維持費用が安く済む&#34;&gt;維持費用が安く済む&lt;/h4&gt;
+&lt;p&gt;他のCMSで有名なものとして、WordPressがあると思います。これで公開ブログを作ろうとすると、LAMP（Linux、Apache、MySQL、PHP）の環境を準備する必要があります。&lt;/p&gt;
+&lt;p&gt;この環境のためのレンタルサーバやVPSをさくらインターネット等で準備する必要があり、維持費用がかかります。（とはいっても、スペックの低い環境であれば、毎月数百円で済むことも多いです。）&lt;/p&gt;
+&lt;p&gt;静的サイトジェネレータとGitHub Pagesだと維持費用がかからないため、個人ブログとしては魅力的でした。（数百円でも毎月かかると結構違います）&lt;/p&gt;
+&lt;h4 id=&#34;セキュリティ対策を考えなくて済む&#34;&gt;セキュリティ対策を考えなくて済む&lt;/h4&gt;
+&lt;p&gt;WordPressは、ITのスキルなしにブログ作成できるところはメリットですが、深刻なセキュリティ脆弱性が頻繁にでています。そのため、頻繁に脆弱性情報をウォッチし、脆弱性に該当する場合はアップデートするなどの対応が必要になります。&lt;/p&gt;
+&lt;p&gt;また他のLAMPのプロダクトについても同様です。WordPressのような動的サイトだと、セキュリティ脆弱性が生まれやすいです。
+（そうしないと、準備した環境が改ざんされたり、乗っ取られたりします。実際私もVPSを借りているのですが、バックドアプログラムを仕込まれ、外部から操作されたことがありました。。）&lt;/p&gt;
+&lt;p&gt;静的サイトジェネレータで作ったサイトだと、静的コンテンツになるためセキュリティ脆弱性のリスクは低減できています。またGitHub Pagesもアップデートの管理をGitHubに委託できるため、個人として対応することは不要になります。&lt;/p&gt;
+&lt;p&gt;セキュリティに関するブログ発信をしていて、改ざんされると情けないので、この理由が一番大きい気がします。&lt;/p&gt;
+&lt;h4 id=&#34;流行しているスキルを身に着けるため&#34;&gt;流行しているスキルを身に着けるため&lt;/h4&gt;
+&lt;p&gt;上記理由だけであれば、『はてなブログ』で作る方法もあるかと思います。その方法も考えたのですが、ITスキルが身につかないと考えたため、採用を見送りました。&lt;/p&gt;
+&lt;p&gt;『静的サイトジェネレータ』でサイトを作るためには、最低限どのような仕組みで動いているかを理解する必要があります。また、GitHub PagesもGitの初歩的な知識が必要になります。
+これらの仕組みや知識を理解・習得するために、はてなブログはやめました。&lt;/p&gt;
+&lt;h2 id=&#34;静的サイトジェネレータとは&#34;&gt;静的サイトジェネレータとは？&lt;/h2&gt;
+&lt;p&gt;CLOUDFLAREのサイトを見ると『生（未加工）データとテンプレート群を基に、完全に静的なHTML Webサイトを生成するツールのことです。』と紹介されています。&lt;/p&gt;
+&lt;p&gt;テンプレートの中に設定ファイルやデータが含まれており、それらを修正します。その後、ツールを実行（ビルド処理）することにより、静的なHTMLコンテンツを自動生成してくれます。&lt;/p&gt;
+&lt;p&gt;このツールはいくつか紹介されており、代表的なものに以下があります。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;NEXT.js&lt;/li&gt;
+&lt;li&gt;Hugo&lt;/li&gt;
+&lt;li&gt;Gatsby&lt;/li&gt;
+&lt;li&gt;Jekyll&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;なお、以下のサイトで静的サイトの人気ランキングありました。
+&lt;a class=&#34;link&#34; href=&#34;https://jamstack.org/generators/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://jamstack.org/generators/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Github Starが多いものが人気があると考え、上位でかつ（私があまり知識のない）JSの知識が不要と考えられるHugoを私は選択しました。&lt;/p&gt;
+&lt;h2 id=&#34;github-pagesとは&#34;&gt;GitHub Pagesとは？&lt;/h2&gt;
+&lt;p&gt;GitHubが提供している静的サイトのホスティングサービスです。レンタルサーバでApacheなどのWEBサービスか稼働している環境を準備することなく、WEBサイトを公開することができます。&lt;/p&gt;
+&lt;p&gt;なお独自ドメインを利用したり、gooogleアドセンスのような広告を張ることも可能とのことです。（ただこのサイトはまだ対応していません。）&lt;/p&gt;
+&lt;h2 id=&#34;環境構築の流れ&#34;&gt;環境構築の流れ&lt;/h2&gt;
+&lt;p&gt;以下にそれぞれの流れを簡単にまとめます。つまづいたところはなるべく丁寧に説明するつもりです。&lt;/p&gt;
+&lt;h3 id=&#34;gitをインストール&#34;&gt;Gitをインストール&lt;/h3&gt;
+&lt;p&gt;詳細に説明しているサイトは、いくつもあるのでここでは割愛します。&lt;/p&gt;
+&lt;p&gt;私は以下のサイトをもとに自分のローカル環境（Windows 11）にインストールしました。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.curict.com/item/60/60bfe0e.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.curict.com/item/60/60bfe0e.html&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;hugoをインストール&#34;&gt;Hugoをインストール&lt;/h3&gt;
+&lt;p&gt;こちらも私は以下のサイトを参考にインストールをしました。
+&lt;a class=&#34;link&#34; href=&#34;https://dev-labo.com/windows/start-up-hugo/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://dev-labo.com/windows/start-up-hugo/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;特段つまづかなかったのですが、以下に簡単に手順をまとめます。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/gohugoio/hugo/releases&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugoのページ&lt;/a&gt;からローカル環境にあわせたZIPファイルをダウンロード&lt;/li&gt;
+&lt;li&gt;ZIPファイルを解凍&lt;/li&gt;
+&lt;li&gt;Hugoのexeファイルを配置する場所を作成し、解凍ファイルをその場所に移動&lt;/li&gt;
+&lt;li&gt;配置したファイル（exeファイル）に対して環境変数のPATHを通す&lt;/li&gt;
+&lt;li&gt;コマンドプロンプトで以下のコマンドを実行し、ヘルプ一覧がでてきたら実行成功&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hugo help
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;サイトのドキュメントルートを作成&#34;&gt;サイトのドキュメントルートを作成&lt;/h3&gt;
+&lt;p&gt;Apacheでいうドキュメントルートを作成します。以下のサイトを参考にしました。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://miiitomi.github.io/p/hugo/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://miiitomi.github.io/p/hugo/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;こちらも特段つまづかなかったのですが、以下に簡単に手順をまとめます。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;コンテンツを配置するディレクトリを作成する。今回は例として以下とする。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;E:\Blog
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;ブログを入れるディレクトリ名（任意）を決める。今回は例として&lt;code&gt;MyBlog&lt;/code&gt;とする。&lt;/li&gt;
+&lt;li&gt;コマンドプロンプトで『1.』で作成したディレクトリに移動して、hugoでディレクトリを作成する。コマンドと出力例は以下の通り。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;E:\Blog&amp;gt; cd E:\Blog
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;E:\Blog&amp;gt; hugo new site MySite
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Congratulations! Your new Hugo site is created in E:\Blog\MySite.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Just a few more steps and you&amp;#39;re ready to go:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;1. Download a theme into the same-named folder.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   Choose a theme from https://themes.gohugo.io/ or
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   create your own with the &amp;#34;hugo new theme &amp;lt;THEMENAME&amp;gt;&amp;#34; command.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;2. Perhaps you want to add some content. You can add single files
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   with &amp;#34;hugo new &amp;lt;SECTIONNAME&amp;gt;\&amp;lt;FILENAME&amp;gt;.&amp;lt;FORMAT&amp;gt;&amp;#34;.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;3. Start the built-in live server via &amp;#34;hugo server&amp;#34;.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Visit https://gohugo.io/ for quickstart guide and full documentation.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;&lt;code&gt;MyBlog&lt;/code&gt;の中に初期のデータが入っていればOK&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;テーマを選択する&#34;&gt;テーマを選択する&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://themes.gohugo.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugoの公式ホームページ&lt;/a&gt;でテーマが公開されています。この中で自分の好みに合ったものを選ぶとよいと思います。
+私は&lt;a class=&#34;link&#34; href=&#34;https://github.com/CaiJimmy/hugo-theme-stack&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Stack&lt;/a&gt;を選びました。&lt;/p&gt;
+&lt;p&gt;なお&lt;a class=&#34;link&#34; href=&#34;https://automation-knowledge.com/hugo-theme-ranking/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;こちらのサイト&lt;/a&gt;では、GitHub Starsに基づいてランキングを集計して公開しているようです。
+よく使われるサイトが後半の設定を変更するためにも有益だと思うので、スターが多いものも選択肢の候補になると思います。&lt;/p&gt;
+&lt;h3 id=&#34;テーマを配置する&#34;&gt;テーマを配置する&lt;/h3&gt;
+&lt;p&gt;ここで色々なサイトで色々やり方が紹介されています。この方法が本来として正しいかは別ですが、私はテーマをZIPでダウンロードして以下のフォルダに配置しました。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;E:\Blog\MySite\themes\
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;git clone&lt;/code&gt;する方法を紹介しているものもありますが、あとでこのテーマの設定を一部変更します。
+そうするとgitでプッシュしてGitHub PagesでDeployできなくなるため、ZIPでダウンロードする方法としました。
+（このあたりは素人なのですが、テーマは別のレポジトリで管理されており、その設定を変更したことにより不整合がおきてエラーが出ると考えています。）
+私は以下のエラーがでてつまづきました。その後ZIPでダウンロードしてやるやり方に変更してできるようになりました。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Error : fatal: No url found for submodule path ‘themes/hugo-theme-stack&amp;#39; in .gitmodules
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;サブモジュールのパスが登録されていないため、元のテーマがアップデートされたときに同期をとることが難しくなると思っていますが、
+それはまた必要にお応じて是正していければと思っています…。&lt;/p&gt;
+&lt;p&gt;上記ディレクトリにテーマを配置できたら、サンプルサイトを起動できるか確認します。
+以下のファイルとディレクトリを、&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;E:\Blog\MySite\themes\hugo-theme-stack\exampleSite\config.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;E:\Blog\MySite\themes\hugo-theme-stack\exampleSite\content
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;以下のディレクトリにコピーします。（&lt;code&gt;content&lt;/code&gt;ディレクトリは置き換えになります。）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;E:\Blog\MySite\
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;また、以下の設定ファイルはコピーした設定ファイル（&lt;code&gt;config.yaml&lt;/code&gt;)を利用したいため削除します。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;E:\Blog\MySite\config.toml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;上記が完了したら、コマンドプロンプトで以下のコマンドを実行します。出力例は以下の通りです。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;E:\Blog\MySite&amp;gt;cd E:\Blog\MySite
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;E:\Blog\MySite&amp;gt;hugo server -D -F
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Start building sites …
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hugo v0.105.0-0e3b42b4a9bdeb4d866210819fc6ddcf51582ffa+extended windows/amd64 BuildDate=2022-10-28T12:29:05Z VendorInfo=gohugoio
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;WARN 2022/12/13 10:42:35 Search page not found. Create a page with layout: search.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;WARN 2022/12/13 10:42:35 Archives page not found. Create a page with layout: archives.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;WARN 2022/12/13 10:42:35 Search page not found. Create a page with layout: search.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;WARN 2022/12/13 10:42:35 Archives page not found. Create a page with layout: archives.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                   | EN | ZH-CN | AR
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;-------------------+----+-------+-----
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  Pages            | 47 |    17 | 20
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  Paginator pages  |  1 |     0 |  0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  Non-page files   |  5 |     4 |  1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  Static files     |  0 |     0 |  0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  Processed images | 24 |    13 |  3
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  Aliases          | 23 |     7 |  9
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  Sitemaps         |  2 |     1 |  1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  Cleaned          |  0 |     0 |  0
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Built in 1123 ms
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Watching for changes in E:\Blog\MySite\{archetypes,content,data,layouts,static,themes}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Watching for config changes in E:\Blog\MySite\config.yaml, E:\Blog\MySite\themes\hugo-theme-stack\config.yaml
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Environment: &amp;#34;development&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Serving pages from memory
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Press Ctrl+C to stop
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;上記でローカルのWEBサービスが立ち上がったため、出力の通りhttp://localhost:1313/にブラウザでアクセスし、サンプルサイトが閲覧できれば稼働できています。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://shimizu4310.github.io/images/ExampleSiteTop.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;設定を変更する&#34;&gt;設定を変更する&lt;/h3&gt;
+&lt;p&gt;作成中。&lt;/p&gt;
 </description>
         </item>
         

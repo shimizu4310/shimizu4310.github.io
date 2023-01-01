@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='最初の記事投稿でサイバーセキュリティ以外の投稿になりますが、このブログの環境づくりで色々手間取ったため、まとめたいと思います。
+概要 以下のプロダクトとサービスを利用してこのブログを作成しています。それらを選んだ理由とその構築方法（メモ）を以下にまとめます。
+静的サイトジェネレータ：Hugo v0.107.0 テーマ：Hugo Theme Stack Git GitHub Pages 他のCMSを利用しない理由 以下の理由で私は、『静的サイトジェネレータ』『GitHub Pages』でブログを作成しようと思いました。 私もググって調べて比較した限りなので、本当はもっと良い方法もあったかもしれません。あくまでご参考までに。
+維持費用が安く済む 他のCMSで有名なものとして、WordPressがあると思います。これで公開ブログを作ろうとすると、LAMP（Linux、Apache、MySQL、PHP）の環境を準備する必要があります。
+この環境のためのレンタルサーバやVPSをさくらインターネット等で準備する必要があり、維持費用がかかります。（とはいっても、スペックの低い環境であれば、毎月数百円で済むことも多いです。）
+静的サイトジェネレータとGitHub Pagesだと維持費用がかからないため、個人ブログとしては魅力的でした。（数百円でも毎月かかると結構違います）
+セキュリティ対策を考えなくて済む WordPressは、ITのスキルなしにブログ作成できるところはメリットですが、深刻なセキュリティ脆弱性が頻繁にでています。そのため、頻繁に脆弱性情報をウォッチし、脆弱性に該当する場合はアップデートするなどの対応が必要になります。
+また他のLAMPのプロダクトについても同様です。WordPressのような動的サイトだと、セキュリティ脆弱性が生まれやすいです。 （そうしないと、準備した環境が改ざんされたり、乗っ取られたりします。実際私もVPSを借りているのですが、バックドアプログラムを仕込まれ、外部から操作されたことがありました。。）
+静的サイトジェネレータで作ったサイトだと、静的コンテンツになるためセキュリティ脆弱性のリスクは低減できています。またGitHub Pagesもアップデートの管理をGitHubに委託できるため、個人として対応することは不要になります。
+セキュリティに関するブログ発信をしていて、改ざんされると情けないので、この理由が一番大きい気がします。
+流行しているスキルを身に着けるため 上記理由だけであれば、『はてなブログ』で作る方法もあるかと思います。その方法も考えたのですが、ITスキルが身につかないと考えたため、採用を見送りました。
+『静的サイトジェネレータ』でサイトを作るためには、最低限どのような仕組みで動いているかを理解する必要があります。また、GitHub PagesもGitの初歩的な知識が必要になります。 これらの仕組みや知識を理解・習得するために、はてなブログはやめました。
+静的サイトジェネレータとは？ CLOUDFLAREのサイトを見ると『生（未加工）データとテンプレート群を基に、完全に静的なHTML Webサイトを生成するツールのことです。』と紹介されています。
+テンプレートの中に設定ファイルやデータが含まれており、それらを修正します。その後、ツールを実行（ビルド処理）することにより、静的なHTMLコンテンツを自動生成してくれます。
+このツールはいくつか紹介されており、代表的なものに以下があります。
+NEXT.js Hugo Gatsby Jekyll なお、以下のサイトで静的サイトの人気ランキングありました。 https://jamstack.org/generators/
+Github Starが多いものが人気があると考え、上位でかつ（私があまり知識のない）JSの知識が不要と考えられるHugoを私は選択しました。
+GitHub Pagesとは？ GitHubが提供している静的サイトのホスティングサービスです。レンタルサーバでApacheなどのWEBサービスか稼働している環境を準備することなく、WEBサイトを公開することができます。
+なお独自ドメインを利用したり、gooogleアドセンスのような広告を張ることも可能とのことです。（ただこのサイトはまだ対応していません。）
+環境構築の流れ 以下にそれぞれの流れを簡単にまとめます。つまづいたところはなるべく丁寧に説明するつもりです。
+Gitをインストール 詳細に説明しているサイトは、いくつもあるのでここでは割愛します。
+私は以下のサイトをもとに自分のローカル環境（Windows 11）にインストールしました。
+https://www.curict.com/item/60/60bfe0e.html
+Hugoをインストール こちらも私は以下のサイトを参考にインストールをしました。 https://dev-labo.com/windows/start-up-hugo/
+特段つまづかなかったのですが、以下に簡単に手順をまとめます。
+Hugoのページからローカル環境にあわせたZIPファイルをダウンロード ZIPファイルを解凍 Hugoのexeファイルを配置する場所を作成し、解凍ファイルをその場所に移動 配置したファイル（exeファイル）に対して環境変数のPATHを通す コマンドプロンプトで以下のコマンドを実行し、ヘルプ一覧がでてきたら実行成功 1 hugo help サイトのドキュメントルートを作成 Apacheでいうドキュメントルートを作成します。以下のサイトを参考にしました。'>
+<title>静的サイトジェネレータとGitHub Pagesを利用したブログ作成</title>
+
+<link rel='canonical' href='https://shimizu4310.github.io/p/hugo_instruction/'>
+
+<link rel="stylesheet" href="/scss/style.min.5a777f0ded082419b1106a6caa8256b541a9ed4ce74fe518797f50f68dac5380.css"><meta property='og:title' content='静的サイトジェネレータとGitHub Pagesを利用したブログ作成'>
+<meta property='og:description' content='最初の記事投稿でサイバーセキュリティ以外の投稿になりますが、このブログの環境づくりで色々手間取ったため、まとめたいと思います。
+概要 以下のプロダクトとサービスを利用してこのブログを作成しています。それらを選んだ理由とその構築方法（メモ）を以下にまとめます。
+静的サイトジェネレータ：Hugo v0.107.0 テーマ：Hugo Theme Stack Git GitHub Pages 他のCMSを利用しない理由 以下の理由で私は、『静的サイトジェネレータ』『GitHub Pages』でブログを作成しようと思いました。 私もググって調べて比較した限りなので、本当はもっと良い方法もあったかもしれません。あくまでご参考までに。
+維持費用が安く済む 他のCMSで有名なものとして、WordPressがあると思います。これで公開ブログを作ろうとすると、LAMP（Linux、Apache、MySQL、PHP）の環境を準備する必要があります。
+この環境のためのレンタルサーバやVPSをさくらインターネット等で準備する必要があり、維持費用がかかります。（とはいっても、スペックの低い環境であれば、毎月数百円で済むことも多いです。）
+静的サイトジェネレータとGitHub Pagesだと維持費用がかからないため、個人ブログとしては魅力的でした。（数百円でも毎月かかると結構違います）
+セキュリティ対策を考えなくて済む WordPressは、ITのスキルなしにブログ作成できるところはメリットですが、深刻なセキュリティ脆弱性が頻繁にでています。そのため、頻繁に脆弱性情報をウォッチし、脆弱性に該当する場合はアップデートするなどの対応が必要になります。
+また他のLAMPのプロダクトについても同様です。WordPressのような動的サイトだと、セキュリティ脆弱性が生まれやすいです。 （そうしないと、準備した環境が改ざんされたり、乗っ取られたりします。実際私もVPSを借りているのですが、バックドアプログラムを仕込まれ、外部から操作されたことがありました。。）
+静的サイトジェネレータで作ったサイトだと、静的コンテンツになるためセキュリティ脆弱性のリスクは低減できています。またGitHub Pagesもアップデートの管理をGitHubに委託できるため、個人として対応することは不要になります。
+セキュリティに関するブログ発信をしていて、改ざんされると情けないので、この理由が一番大きい気がします。
+流行しているスキルを身に着けるため 上記理由だけであれば、『はてなブログ』で作る方法もあるかと思います。その方法も考えたのですが、ITスキルが身につかないと考えたため、採用を見送りました。
+『静的サイトジェネレータ』でサイトを作るためには、最低限どのような仕組みで動いているかを理解する必要があります。また、GitHub PagesもGitの初歩的な知識が必要になります。 これらの仕組みや知識を理解・習得するために、はてなブログはやめました。
+静的サイトジェネレータとは？ CLOUDFLAREのサイトを見ると『生（未加工）データとテンプレート群を基に、完全に静的なHTML Webサイトを生成するツールのことです。』と紹介されています。
+テンプレートの中に設定ファイルやデータが含まれており、それらを修正します。その後、ツールを実行（ビルド処理）することにより、静的なHTMLコンテンツを自動生成してくれます。
+このツールはいくつか紹介されており、代表的なものに以下があります。
+NEXT.js Hugo Gatsby Jekyll なお、以下のサイトで静的サイトの人気ランキングありました。 https://jamstack.org/generators/
+Github Starが多いものが人気があると考え、上位でかつ（私があまり知識のない）JSの知識が不要と考えられるHugoを私は選択しました。
+GitHub Pagesとは？ GitHubが提供している静的サイトのホスティングサービスです。レンタルサーバでApacheなどのWEBサービスか稼働している環境を準備することなく、WEBサイトを公開することができます。
+なお独自ドメインを利用したり、gooogleアドセンスのような広告を張ることも可能とのことです。（ただこのサイトはまだ対応していません。）
+環境構築の流れ 以下にそれぞれの流れを簡単にまとめます。つまづいたところはなるべく丁寧に説明するつもりです。
+Gitをインストール 詳細に説明しているサイトは、いくつもあるのでここでは割愛します。
+私は以下のサイトをもとに自分のローカル環境（Windows 11）にインストールしました。
+https://www.curict.com/item/60/60bfe0e.html
+Hugoをインストール こちらも私は以下のサイトを参考にインストールをしました。 https://dev-labo.com/windows/start-up-hugo/
+特段つまづかなかったのですが、以下に簡単に手順をまとめます。
+Hugoのページからローカル環境にあわせたZIPファイルをダウンロード ZIPファイルを解凍 Hugoのexeファイルを配置する場所を作成し、解凍ファイルをその場所に移動 配置したファイル（exeファイル）に対して環境変数のPATHを通す コマンドプロンプトで以下のコマンドを実行し、ヘルプ一覧がでてきたら実行成功 1 hugo help サイトのドキュメントルートを作成 Apacheでいうドキュメントルートを作成します。以下のサイトを参考にしました。'>
+<meta property='og:url' content='https://shimizu4310.github.io/p/hugo_instruction/'>
+<meta property='og:site_name' content='Security Blog for IT Engineers'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2022-12-31T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-12-31T00:00:00&#43;00:00'/><meta property='og:image' content='https://shimizu4310.github.io/images/avator2.jpg' />
+<meta name="twitter:title" content="静的サイトジェネレータとGitHub Pagesを利用したブログ作成">
+<meta name="twitter:description" content="最初の記事投稿でサイバーセキュリティ以外の投稿になりますが、このブログの環境づくりで色々手間取ったため、まとめたいと思います。
+概要 以下のプロダクトとサービスを利用してこのブログを作成しています。それらを選んだ理由とその構築方法（メモ）を以下にまとめます。
+静的サイトジェネレータ：Hugo v0.107.0 テーマ：Hugo Theme Stack Git GitHub Pages 他のCMSを利用しない理由 以下の理由で私は、『静的サイトジェネレータ』『GitHub Pages』でブログを作成しようと思いました。 私もググって調べて比較した限りなので、本当はもっと良い方法もあったかもしれません。あくまでご参考までに。
+維持費用が安く済む 他のCMSで有名なものとして、WordPressがあると思います。これで公開ブログを作ろうとすると、LAMP（Linux、Apache、MySQL、PHP）の環境を準備する必要があります。
+この環境のためのレンタルサーバやVPSをさくらインターネット等で準備する必要があり、維持費用がかかります。（とはいっても、スペックの低い環境であれば、毎月数百円で済むことも多いです。）
+静的サイトジェネレータとGitHub Pagesだと維持費用がかからないため、個人ブログとしては魅力的でした。（数百円でも毎月かかると結構違います）
+セキュリティ対策を考えなくて済む WordPressは、ITのスキルなしにブログ作成できるところはメリットですが、深刻なセキュリティ脆弱性が頻繁にでています。そのため、頻繁に脆弱性情報をウォッチし、脆弱性に該当する場合はアップデートするなどの対応が必要になります。
+また他のLAMPのプロダクトについても同様です。WordPressのような動的サイトだと、セキュリティ脆弱性が生まれやすいです。 （そうしないと、準備した環境が改ざんされたり、乗っ取られたりします。実際私もVPSを借りているのですが、バックドアプログラムを仕込まれ、外部から操作されたことがありました。。）
+静的サイトジェネレータで作ったサイトだと、静的コンテンツになるためセキュリティ脆弱性のリスクは低減できています。またGitHub Pagesもアップデートの管理をGitHubに委託できるため、個人として対応することは不要になります。
+セキュリティに関するブログ発信をしていて、改ざんされると情けないので、この理由が一番大きい気がします。
+流行しているスキルを身に着けるため 上記理由だけであれば、『はてなブログ』で作る方法もあるかと思います。その方法も考えたのですが、ITスキルが身につかないと考えたため、採用を見送りました。
+『静的サイトジェネレータ』でサイトを作るためには、最低限どのような仕組みで動いているかを理解する必要があります。また、GitHub PagesもGitの初歩的な知識が必要になります。 これらの仕組みや知識を理解・習得するために、はてなブログはやめました。
+静的サイトジェネレータとは？ CLOUDFLAREのサイトを見ると『生（未加工）データとテンプレート群を基に、完全に静的なHTML Webサイトを生成するツールのことです。』と紹介されています。
+テンプレートの中に設定ファイルやデータが含まれており、それらを修正します。その後、ツールを実行（ビルド処理）することにより、静的なHTMLコンテンツを自動生成してくれます。
+このツールはいくつか紹介されており、代表的なものに以下があります。
+NEXT.js Hugo Gatsby Jekyll なお、以下のサイトで静的サイトの人気ランキングありました。 https://jamstack.org/generators/
+Github Starが多いものが人気があると考え、上位でかつ（私があまり知識のない）JSの知識が不要と考えられるHugoを私は選択しました。
+GitHub Pagesとは？ GitHubが提供している静的サイトのホスティングサービスです。レンタルサーバでApacheなどのWEBサービスか稼働している環境を準備することなく、WEBサイトを公開することができます。
+なお独自ドメインを利用したり、gooogleアドセンスのような広告を張ることも可能とのことです。（ただこのサイトはまだ対応していません。）
+環境構築の流れ 以下にそれぞれの流れを簡単にまとめます。つまづいたところはなるべく丁寧に説明するつもりです。
+Gitをインストール 詳細に説明しているサイトは、いくつもあるのでここでは割愛します。
+私は以下のサイトをもとに自分のローカル環境（Windows 11）にインストールしました。
+https://www.curict.com/item/60/60bfe0e.html
+Hugoをインストール こちらも私は以下のサイトを参考にインストールをしました。 https://dev-labo.com/windows/start-up-hugo/
+特段つまづかなかったのですが、以下に簡単に手順をまとめます。
+Hugoのページからローカル環境にあわせたZIPファイルをダウンロード ZIPファイルを解凍 Hugoのexeファイルを配置する場所を作成し、解凍ファイルをその場所に移動 配置したファイル（exeファイル）に対して環境変数のPATHを通す コマンドプロンプトで以下のコマンドを実行し、ヘルプ一覧がでてきたら実行成功 1 hugo help サイトのドキュメントルートを作成 Apacheでいうドキュメントルートを作成します。以下のサイトを参考にしました。"><meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content='https://shimizu4310.github.io/images/avator2.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "dark");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="メニューを開く・閉じる">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="/images/avator2.jpg" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Security Blog for IT Engineers</a></h1>
+            <h2 class="site-description">ITエンジニアのためのセキュリティブログです。</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>ダークモード</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目次</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#概要">概要</a></li>
+    <li><a href="#他のcmsを利用しない理由">他のCMSを利用しない理由</a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#維持費用が安く済む">維持費用が安く済む</a></li>
+            <li><a href="#セキュリティ対策を考えなくて済む">セキュリティ対策を考えなくて済む</a></li>
+            <li><a href="#流行しているスキルを身に着けるため">流行しているスキルを身に着けるため</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#静的サイトジェネレータとは">静的サイトジェネレータとは？</a></li>
+    <li><a href="#github-pagesとは">GitHub Pagesとは？</a></li>
+    <li><a href="#環境構築の流れ">環境構築の流れ</a>
+      <ol>
+        <li><a href="#gitをインストール">Gitをインストール</a></li>
+        <li><a href="#hugoをインストール">Hugoをインストール</a></li>
+        <li><a href="#サイトのドキュメントルートを作成">サイトのドキュメントルートを作成</a></li>
+        <li><a href="#テーマを選択する">テーマを選択する</a></li>
+        <li><a href="#テーマを配置する">テーマを配置する</a></li>
+        <li><a href="#設定を変更する">設定を変更する</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/hugo/" >
+                Hugo
+            </a>
+        
+            <a href="/categories/%E9%9D%99%E7%9A%84%E3%82%B5%E3%82%A4%E3%83%88%E3%82%B8%E3%82%A7%E3%83%8D%E3%83%AC%E3%83%BC%E3%82%BF/" >
+                静的サイトジェネレータ
+            </a>
+        
+            <a href="/categories/github-pages/" >
+                GitHub Pages
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/hugo_instruction/">静的サイトジェネレータとGitHub Pagesを利用したブログ作成</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Dec 31, 2022</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>最初の記事投稿でサイバーセキュリティ以外の投稿になりますが、このブログの環境づくりで色々手間取ったため、まとめたいと思います。</p>
+<h2 id="概要">概要</h2>
+<p>以下のプロダクトとサービスを利用してこのブログを作成しています。それらを選んだ理由とその構築方法（メモ）を以下にまとめます。</p>
+<blockquote>
+<ul>
+<li>静的サイトジェネレータ：<a class="link" href="https://gohugo.io"  target="_blank" rel="noopener"
+    >Hugo</a> v0.107.0</li>
+<li>テーマ：<a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack"  target="_blank" rel="noopener"
+    >Hugo Theme Stack</a></li>
+<li>Git</li>
+<li>GitHub Pages</li>
+</ul>
+</blockquote>
+<h2 id="他のcmsを利用しない理由">他のCMSを利用しない理由</h2>
+<p>以下の理由で私は、『静的サイトジェネレータ』『GitHub Pages』でブログを作成しようと思いました。
+私もググって調べて比較した限りなので、本当はもっと良い方法もあったかもしれません。あくまでご参考までに。</p>
+<h4 id="維持費用が安く済む">維持費用が安く済む</h4>
+<p>他のCMSで有名なものとして、WordPressがあると思います。これで公開ブログを作ろうとすると、LAMP（Linux、Apache、MySQL、PHP）の環境を準備する必要があります。</p>
+<p>この環境のためのレンタルサーバやVPSをさくらインターネット等で準備する必要があり、維持費用がかかります。（とはいっても、スペックの低い環境であれば、毎月数百円で済むことも多いです。）</p>
+<p>静的サイトジェネレータとGitHub Pagesだと維持費用がかからないため、個人ブログとしては魅力的でした。（数百円でも毎月かかると結構違います）</p>
+<h4 id="セキュリティ対策を考えなくて済む">セキュリティ対策を考えなくて済む</h4>
+<p>WordPressは、ITのスキルなしにブログ作成できるところはメリットですが、深刻なセキュリティ脆弱性が頻繁にでています。そのため、頻繁に脆弱性情報をウォッチし、脆弱性に該当する場合はアップデートするなどの対応が必要になります。</p>
+<p>また他のLAMPのプロダクトについても同様です。WordPressのような動的サイトだと、セキュリティ脆弱性が生まれやすいです。
+（そうしないと、準備した環境が改ざんされたり、乗っ取られたりします。実際私もVPSを借りているのですが、バックドアプログラムを仕込まれ、外部から操作されたことがありました。。）</p>
+<p>静的サイトジェネレータで作ったサイトだと、静的コンテンツになるためセキュリティ脆弱性のリスクは低減できています。またGitHub Pagesもアップデートの管理をGitHubに委託できるため、個人として対応することは不要になります。</p>
+<p>セキュリティに関するブログ発信をしていて、改ざんされると情けないので、この理由が一番大きい気がします。</p>
+<h4 id="流行しているスキルを身に着けるため">流行しているスキルを身に着けるため</h4>
+<p>上記理由だけであれば、『はてなブログ』で作る方法もあるかと思います。その方法も考えたのですが、ITスキルが身につかないと考えたため、採用を見送りました。</p>
+<p>『静的サイトジェネレータ』でサイトを作るためには、最低限どのような仕組みで動いているかを理解する必要があります。また、GitHub PagesもGitの初歩的な知識が必要になります。
+これらの仕組みや知識を理解・習得するために、はてなブログはやめました。</p>
+<h2 id="静的サイトジェネレータとは">静的サイトジェネレータとは？</h2>
+<p>CLOUDFLAREのサイトを見ると『生（未加工）データとテンプレート群を基に、完全に静的なHTML Webサイトを生成するツールのことです。』と紹介されています。</p>
+<p>テンプレートの中に設定ファイルやデータが含まれており、それらを修正します。その後、ツールを実行（ビルド処理）することにより、静的なHTMLコンテンツを自動生成してくれます。</p>
+<p>このツールはいくつか紹介されており、代表的なものに以下があります。</p>
+<ul>
+<li>NEXT.js</li>
+<li>Hugo</li>
+<li>Gatsby</li>
+<li>Jekyll</li>
+</ul>
+<p>なお、以下のサイトで静的サイトの人気ランキングありました。
+<a class="link" href="https://jamstack.org/generators/"  target="_blank" rel="noopener"
+    >https://jamstack.org/generators/</a></p>
+<p>Github Starが多いものが人気があると考え、上位でかつ（私があまり知識のない）JSの知識が不要と考えられるHugoを私は選択しました。</p>
+<h2 id="github-pagesとは">GitHub Pagesとは？</h2>
+<p>GitHubが提供している静的サイトのホスティングサービスです。レンタルサーバでApacheなどのWEBサービスか稼働している環境を準備することなく、WEBサイトを公開することができます。</p>
+<p>なお独自ドメインを利用したり、gooogleアドセンスのような広告を張ることも可能とのことです。（ただこのサイトはまだ対応していません。）</p>
+<h2 id="環境構築の流れ">環境構築の流れ</h2>
+<p>以下にそれぞれの流れを簡単にまとめます。つまづいたところはなるべく丁寧に説明するつもりです。</p>
+<h3 id="gitをインストール">Gitをインストール</h3>
+<p>詳細に説明しているサイトは、いくつもあるのでここでは割愛します。</p>
+<p>私は以下のサイトをもとに自分のローカル環境（Windows 11）にインストールしました。</p>
+<p><a class="link" href="https://www.curict.com/item/60/60bfe0e.html"  target="_blank" rel="noopener"
+    >https://www.curict.com/item/60/60bfe0e.html</a></p>
+<h3 id="hugoをインストール">Hugoをインストール</h3>
+<p>こちらも私は以下のサイトを参考にインストールをしました。
+<a class="link" href="https://dev-labo.com/windows/start-up-hugo/"  target="_blank" rel="noopener"
+    >https://dev-labo.com/windows/start-up-hugo/</a></p>
+<p>特段つまづかなかったのですが、以下に簡単に手順をまとめます。</p>
+<ol>
+<li><a class="link" href="https://github.com/gohugoio/hugo/releases"  target="_blank" rel="noopener"
+    >Hugoのページ</a>からローカル環境にあわせたZIPファイルをダウンロード</li>
+<li>ZIPファイルを解凍</li>
+<li>Hugoのexeファイルを配置する場所を作成し、解凍ファイルをその場所に移動</li>
+<li>配置したファイル（exeファイル）に対して環境変数のPATHを通す</li>
+<li>コマンドプロンプトで以下のコマンドを実行し、ヘルプ一覧がでてきたら実行成功</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hugo help
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="サイトのドキュメントルートを作成">サイトのドキュメントルートを作成</h3>
+<p>Apacheでいうドキュメントルートを作成します。以下のサイトを参考にしました。</p>
+<p><a class="link" href="https://miiitomi.github.io/p/hugo/"  target="_blank" rel="noopener"
+    >https://miiitomi.github.io/p/hugo/</a></p>
+<p>こちらも特段つまづかなかったのですが、以下に簡単に手順をまとめます。</p>
+<ol>
+<li>コンテンツを配置するディレクトリを作成する。今回は例として以下とする。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">E:\Blog
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>ブログを入れるディレクトリ名（任意）を決める。今回は例として<code>MyBlog</code>とする。</li>
+<li>コマンドプロンプトで『1.』で作成したディレクトリに移動して、hugoでディレクトリを作成する。コマンドと出力例は以下の通り。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">E:\Blog&gt; cd E:\Blog
+</span></span><span class="line"><span class="cl">E:\Blog&gt; hugo new site MySite
+</span></span><span class="line"><span class="cl">Congratulations! Your new Hugo site is created in E:\Blog\MySite.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Just a few more steps and you&#39;re ready to go:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">1. Download a theme into the same-named folder.
+</span></span><span class="line"><span class="cl">   Choose a theme from https://themes.gohugo.io/ or
+</span></span><span class="line"><span class="cl">   create your own with the &#34;hugo new theme &lt;THEMENAME&gt;&#34; command.
+</span></span><span class="line"><span class="cl">2. Perhaps you want to add some content. You can add single files
+</span></span><span class="line"><span class="cl">   with &#34;hugo new &lt;SECTIONNAME&gt;\&lt;FILENAME&gt;.&lt;FORMAT&gt;&#34;.
+</span></span><span class="line"><span class="cl">3. Start the built-in live server via &#34;hugo server&#34;.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Visit https://gohugo.io/ for quickstart guide and full documentation.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li><code>MyBlog</code>の中に初期のデータが入っていればOK</li>
+</ol>
+<h3 id="テーマを選択する">テーマを選択する</h3>
+<p><a class="link" href="https://themes.gohugo.io/"  target="_blank" rel="noopener"
+    >Hugoの公式ホームページ</a>でテーマが公開されています。この中で自分の好みに合ったものを選ぶとよいと思います。
+私は<a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack"  target="_blank" rel="noopener"
+    >Stack</a>を選びました。</p>
+<p>なお<a class="link" href="https://automation-knowledge.com/hugo-theme-ranking/"  target="_blank" rel="noopener"
+    >こちらのサイト</a>では、GitHub Starsに基づいてランキングを集計して公開しているようです。
+よく使われるサイトが後半の設定を変更するためにも有益だと思うので、スターが多いものも選択肢の候補になると思います。</p>
+<h3 id="テーマを配置する">テーマを配置する</h3>
+<p>ここで色々なサイトで色々やり方が紹介されています。この方法が本来として正しいかは別ですが、私はテーマをZIPでダウンロードして以下のフォルダに配置しました。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">E:\Blog\MySite\themes\
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>git clone</code>する方法を紹介しているものもありますが、あとでこのテーマの設定を一部変更します。
+そうするとgitでプッシュしてGitHub PagesでDeployできなくなるため、ZIPでダウンロードする方法としました。
+（このあたりは素人なのですが、テーマは別のレポジトリで管理されており、その設定を変更したことにより不整合がおきてエラーが出ると考えています。）
+私は以下のエラーがでてつまづきました。その後ZIPでダウンロードしてやるやり方に変更してできるようになりました。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Error : fatal: No url found for submodule path ‘themes/hugo-theme-stack&#39; in .gitmodules
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>サブモジュールのパスが登録されていないため、元のテーマがアップデートされたときに同期をとることが難しくなると思っていますが、
+それはまた必要にお応じて是正していければと思っています…。</p>
+<p>上記ディレクトリにテーマを配置できたら、サンプルサイトを起動できるか確認します。
+以下のファイルとディレクトリを、</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">E:\Blog\MySite\themes\hugo-theme-stack\exampleSite\config.yaml
+</span></span><span class="line"><span class="cl">E:\Blog\MySite\themes\hugo-theme-stack\exampleSite\content
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以下のディレクトリにコピーします。（<code>content</code>ディレクトリは置き換えになります。）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">E:\Blog\MySite\
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>また、以下の設定ファイルはコピーした設定ファイル（<code>config.yaml</code>)を利用したいため削除します。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">E:\Blog\MySite\config.toml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>上記が完了したら、コマンドプロンプトで以下のコマンドを実行します。出力例は以下の通りです。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">E:\Blog\MySite&gt;cd E:\Blog\MySite
+</span></span><span class="line"><span class="cl">E:\Blog\MySite&gt;hugo server -D -F
+</span></span><span class="line"><span class="cl">Start building sites …
+</span></span><span class="line"><span class="cl">hugo v0.105.0-0e3b42b4a9bdeb4d866210819fc6ddcf51582ffa+extended windows/amd64 BuildDate=2022-10-28T12:29:05Z VendorInfo=gohugoio
+</span></span><span class="line"><span class="cl">WARN 2022/12/13 10:42:35 Search page not found. Create a page with layout: search.
+</span></span><span class="line"><span class="cl">WARN 2022/12/13 10:42:35 Archives page not found. Create a page with layout: archives.
+</span></span><span class="line"><span class="cl">WARN 2022/12/13 10:42:35 Search page not found. Create a page with layout: search.
+</span></span><span class="line"><span class="cl">WARN 2022/12/13 10:42:35 Archives page not found. Create a page with layout: archives.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                   | EN | ZH-CN | AR
+</span></span><span class="line"><span class="cl">-------------------+----+-------+-----
+</span></span><span class="line"><span class="cl">  Pages            | 47 |    17 | 20
+</span></span><span class="line"><span class="cl">  Paginator pages  |  1 |     0 |  0
+</span></span><span class="line"><span class="cl">  Non-page files   |  5 |     4 |  1
+</span></span><span class="line"><span class="cl">  Static files     |  0 |     0 |  0
+</span></span><span class="line"><span class="cl">  Processed images | 24 |    13 |  3
+</span></span><span class="line"><span class="cl">  Aliases          | 23 |     7 |  9
+</span></span><span class="line"><span class="cl">  Sitemaps         |  2 |     1 |  1
+</span></span><span class="line"><span class="cl">  Cleaned          |  0 |     0 |  0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Built in 1123 ms
+</span></span><span class="line"><span class="cl">Watching for changes in E:\Blog\MySite\{archetypes,content,data,layouts,static,themes}
+</span></span><span class="line"><span class="cl">Watching for config changes in E:\Blog\MySite\config.yaml, E:\Blog\MySite\themes\hugo-theme-stack\config.yaml
+</span></span><span class="line"><span class="cl">Environment: &#34;development&#34;
+</span></span><span class="line"><span class="cl">Serving pages from memory
+</span></span><span class="line"><span class="cl">Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+</span></span><span class="line"><span class="cl">Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)
+</span></span><span class="line"><span class="cl">Press Ctrl+C to stop
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>上記でローカルのWEBサービスが立ち上がったため、出力の通りhttp://localhost:1313/にブラウザでアクセスし、サンプルサイトが閲覧できれば稼働できています。</p>
+<p><img src="/images/ExampleSiteTop.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h3 id="設定を変更する">設定を変更する</h3>
+<p>作成中。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2023 Security Blog for IT Engineers
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        テーマ <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> は <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> によって設計されています。
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
