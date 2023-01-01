@@ -415,6 +415,7 @@ PublicかPrivateのどちらでも公開はできるようですが、マーク�
 	
 &gt;
 もしくはドメインを直接指定しても確認ができると思います。&lt;/p&gt;
+&lt;h3 id=&#34;うまくできない場合&#34;&gt;うまくできない場合&lt;/h3&gt;
 &lt;p&gt;うまく表示ができなかったりエラーが出る場合は、なんらかビルドに失敗していると考えられます。
 ローカル環境で&lt;code&gt;hugo server -D -F&lt;/code&gt;でうまく表示ができ、GitHub Pages上で表示できない場合、GitHub Pagesでエラーを起こしている可能性があります。
 &lt;img src=&#34;https://shimizu4310.github.io/images/GitHubPages4.png&#34;

@@ -415,6 +415,7 @@ PublicかPrivateのどちらでも公開はできるようですが、マーク�
 	
 &gt;
 もしくはドメインを直接指定しても確認ができると思います。&lt;/p&gt;
+&lt;h3 id=&#34;うまくできない場合&#34;&gt;うまくできない場合&lt;/h3&gt;
 &lt;p&gt;うまく表示ができなかったりエラーが出る場合は、なんらかビルドに失敗していると考えられます。
 ローカル環境で&lt;code&gt;hugo server -D -F&lt;/code&gt;でうまく表示ができ、GitHub Pages上で表示できない場合、GitHub Pagesでエラーを起こしている可能性があります。
 &lt;img src=&#34;https://shimizu4310.github.io/images/GitHubPages4.png&#34;
@@ -428,15 +429,6 @@ PublicかPrivateのどちらでも公開はできるようですが、マーク�
 上記のように、&lt;code&gt;Actions&lt;/code&gt;を見るとステータスがみえるため、deployが成功しているかを確認すると原因究明につなげられると思います。
 （エラーが出ている場合は、エラーで検索すると原因や対応方法がわかるかと思います。）&lt;/p&gt;
 &lt;p&gt;長くなりましたが、私も手探りしながら構築しました。もっと良い方法などありましたらツイッター等でコメントをください！&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>記事作成中。</title>
-        <link>https://shimizu4310.github.io/p/self_introduction/</link>
-        <pubDate>Tue, 13 Dec 2022 00:00:00 +0000</pubDate>
-        
-        <guid>https://shimizu4310.github.io/p/self_introduction/</guid>
-        <description>&lt;p&gt;記事作成中です。今後アップデートしていきます。&lt;/p&gt;
 </description>
         </item>
         

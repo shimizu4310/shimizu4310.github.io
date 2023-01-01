@@ -280,6 +280,7 @@ E:\Blog\MySite
 ![](images/GitHubPages3.png)
 もしくはドメインを直接指定しても確認ができると思います。
 
+### うまくできない場合
 うまく表示ができなかったりエラーが出る場合は、なんらかビルドに失敗していると考えられます。
 ローカル環境で```hugo server -D -F```でうまく表示ができ、GitHub Pages上で表示できない場合、GitHub Pagesでエラーを起こしている可能性があります。
 ![](images/GitHubPages4.png)
